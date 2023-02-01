@@ -2,71 +2,11 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const generateMarkdown = require("./utils/generateMarkdown");
 
-// Creates an array of questions for user input
-// const questions = [
-//     {
-//         type: 'input',
-//         message: 'README description:',
-//         name: 'description',
-//     },
-//     {
-//         type: 'input',
-//         message: 'Table of Contents:',
-//         name: 'contents',
-//     },
-//     {
-//         type: 'input',
-//         message: 'Installation:',
-//         name: 'installation',
-//     },
-//     {
-//         type: 'input',
-//         message: 'Usage:',
-//         name: 'usage',
-//     },
-//     {
-//         type: 'list-input',
-//         message: 'License:',
-//         choices: licenseOptions,
-//     },
-//     {
-//         type: 'input',
-//         message: 'Contributing',
-//         name: 'contributing',
-//     },
-//     {
-//         type: 'input',
-//         message: 'Test',
-//         name: 'test',
-//     },
-//     {
-//         type: 'input',
-//         message: 'Questions',
-//         name: 'questions',
-//     },
-// ];
-
 const licenseOptions = ['None','Apache License 2.0','MIT License',
     'BSD 2-Clause License'];
 
-// Creates a function to write README file
-function writeToFile(fileName, data) {
-
-    const md = generateMarkdown(data)
-    fs.writeFile("README.md",md, (err) => {
-        if (err) {
-            console.error(err)
-        } else {
-            console.log('Success: README.md File Generated!')
-        }
-    })
-}
-
-// Creates a function to initialize app
-function init() {
-    inquirer
-        .prompt([
-            // fix if possible
+// Creates an array of questions for user input
+const questions = [
             {
                 type: 'input',
                 message: 'Project Title:',
@@ -120,8 +60,26 @@ function init() {
                 message: 'Email Address:',
                 name: 'email',
                 default: 'email@email.com',
-            },
-        ])
+            }
+        ];
+
+// Creates a function to write README file
+function writeToFile(fileName, data) {
+
+    const md = generateMarkdown(data)
+    fs.writeFile("README.md",md, (err) => {
+        if (err) {
+            console.error(err)
+        } else {
+            console.log('Success: README.md File Generated!')
+        }
+    })
+}
+
+// Creates a function to initialize app
+function init() {
+    inquirer
+        .prompt(questions)
         .then((data) => {
             const prompt = {
                 title: data.title,
@@ -134,7 +92,6 @@ function init() {
                 username: data.username,
                 email: data.email
             }
-
         writeToFile(prompt.title,prompt)
 });
 }
