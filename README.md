@@ -52,6 +52,8 @@ The last section of a high-quality README file is the license. This lets other d
 
 ![badmath](https://img.shields.io/github/languages/top/lernantino/badmath)
 
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
 Badges aren't necessary, per se, but they demonstrate street cred. Badges let other developers know that you know what you're doing. Check out the badges hosted by [shields.io](https://shields.io/). You may not understand what they all represent now, but you will in time.
 
 ## Features
@@ -65,3 +67,6 @@ If you created an application or package and would like other developers to cont
 ## Tests
 
 Go the extra mile and write tests for your application. Then provide examples on how to run them here.
+
+
+[def]: https://img.shields.io/bower/l/MI

@@ -4,53 +4,57 @@ const fs = require('fs');
 const generateMarkdown = require("./utils/generateMarkdown");
 
 // TODO: Create an array of questions for user input
-const questions = [
-    {
-        type: 'input',
-        message: 'README description',
-        name: 'description',
-    },
-    {
-        type: 'input',
-        message: 'Table of Contents',
-        name: 'contents',
-    },
-    {
-        type: 'input',
-        message: 'Installation',
-        name: 'installation',
-    },
-    {
-        type: 'input',
-        message: 'Usage',
-        name: 'usage',
-    },
-    {
-        type: 'input',
-        message: 'License',
-        name: 'license',
-    },
-    {
-        type: 'input',
-        message: 'Contributing',
-        name: 'contributing',
-    },
-    {
-        type: 'input',
-        message: 'Test',
-        name: 'test',
-    },
-    {
-        type: 'input',
-        message: 'Questions',
-        name: 'questions',
-    },
-];
+// const questions = [
+//     {
+//         type: 'input',
+//         message: 'README description:',
+//         name: 'description',
+//     },
+//     {
+//         type: 'input',
+//         message: 'Table of Contents:',
+//         name: 'contents',
+//     },
+//     {
+//         type: 'input',
+//         message: 'Installation:',
+//         name: 'installation',
+//     },
+//     {
+//         type: 'input',
+//         message: 'Usage:',
+//         name: 'usage',
+//     },
+//     {
+//         type: 'list-input',
+//         message: 'License:',
+//         choices: licenseOptions,
+//     },
+//     {
+//         type: 'input',
+//         message: 'Contributing',
+//         name: 'contributing',
+//     },
+//     {
+//         type: 'input',
+//         message: 'Test',
+//         name: 'test',
+//     },
+//     {
+//         type: 'input',
+//         message: 'Questions',
+//         name: 'questions',
+//     },
+// ];
+
+const licenseOptions = ['None','Apache License 2.0','MIT License',
+    'BSD 2-Clause License'];
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
+
     const md = generateMarkdown(data)
-    fs.writeFile('README',md, (err) => {
+    fs.writeFile("README.md",md, (err) => {
         if (err) {
             console.error(err)
         } else {
@@ -76,11 +80,6 @@ function init() {
             },
             {
                 type: 'input',
-                message: 'Table of Contents:',
-                name: 'contents',
-            },
-            {
-                type: 'input',
                 message: 'Installation:',
                 name: 'installation',
             },
@@ -90,9 +89,10 @@ function init() {
                 name: 'usage',
             },
             {
-                type: 'input',
+                type: 'list',
                 message: 'License:',
                 name: 'license',
+                choices: licenseOptions,
             },
             {
                 type: 'input',
@@ -106,21 +106,20 @@ function init() {
             },
             {
                 type: 'input',
-                message: 'Questions:',
-                name: 'questions',
+                message: 'GitHub username:',
+                name: 'username',
             },
         ])
         .then((data) => {
             const prompt = {
                 title: data.title,
                 description: data.description,
-                contents: data.contents,
                 installation: data.installation,
                 usage: data.usage,
                 license: data.license,
                 contributing: data.contributing,
                 test: data.test,
-                questions: data.questions
+                username: data.username
             }
 
         writeToFile(prompt.title,prompt)
