@@ -1,9 +1,8 @@
-// TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
 const generateMarkdown = require("./utils/generateMarkdown");
 
-// TODO: Create an array of questions for user input
+// Creates an array of questions for user input
 // const questions = [
 //     {
 //         type: 'input',
@@ -50,7 +49,7 @@ const generateMarkdown = require("./utils/generateMarkdown");
 const licenseOptions = ['None','Apache License 2.0','MIT License',
     'BSD 2-Clause License'];
 
-// TODO: Create a function to write README file
+// Creates a function to write README file
 function writeToFile(fileName, data) {
 
     const md = generateMarkdown(data)
@@ -63,7 +62,7 @@ function writeToFile(fileName, data) {
     })
 }
 
-// TODO: Create a function to initialize app
+// Creates a function to initialize app
 function init() {
     inquirer
         .prompt([
@@ -72,21 +71,25 @@ function init() {
                 type: 'input',
                 message: 'Project Title:',
                 name: 'title',
+                default: 'Project',
             },
             {
                 type: 'input',
                 message: 'README description:',
                 name: 'description',
+                default: 'What was your motivation? Why did you build this project? What problem does it solve? What did you learn?',
             },
             {
                 type: 'input',
                 message: 'Installation:',
                 name: 'installation',
+                default: 'N/A',
             },
             {
                 type: 'input',
                 message: 'Usage:',
                 name: 'usage',
+                default: 'N/A',
             },
             {
                 type: 'list',
@@ -98,16 +101,25 @@ function init() {
                 type: 'input',
                 message: 'Contributing:',
                 name: 'contributing',
+                default: 'N/A',
             },
             {
                 type: 'input',
                 message: 'Test:',
                 name: 'test',
+                default: 'N/A',
             },
             {
                 type: 'input',
                 message: 'GitHub username:',
                 name: 'username',
+                default: '',
+            },
+            {
+                type: 'input',
+                message: 'Email Address:',
+                name: 'email',
+                default: 'email@email.com',
             },
         ])
         .then((data) => {
@@ -119,7 +131,8 @@ function init() {
                 license: data.license,
                 contributing: data.contributing,
                 test: data.test,
-                username: data.username
+                username: data.username,
+                email: data.email
             }
 
         writeToFile(prompt.title,prompt)
