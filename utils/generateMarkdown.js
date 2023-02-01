@@ -1,45 +1,99 @@
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
+// Creates a function that returns a license badge based on which license is passed in
+// If there is no license, returns an empty string
 function renderLicenseBadge(license){
+  switch(license) {
+    case 'None':
+      return '';
+    case 'MIT License':
+      return '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)';
+    case 'Apache License 2.0':
+      return '[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)';
+    case 'BSD 2-Clause License':
+      return '[![License](https://img.shields.io/badge/License-BSD_2--Clause-orange.svg)](https://opensource.org/licenses/BSD-2-Clause)';
+  }
 }
 
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
-function renderLicenseLink(license) {}
+// Creates a function that returns the license link
+// If there is no license, returns an empty string
+function renderLicenseLink(license) {
+  switch(license) {
+    case 'None':
+      return '';
+    case 'Apache License 2.0':
+      return 'https://opensource.org/licenses/Apache-2.0';
+    case 'MIT License':
+      return'https://opensource.org/licenses/MIT';
+    case 'BSD 2-Clause License':
+      return 'https://opensource.org/licenses/BSD-2-Clause';
+  }
+}
 
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
-function renderLicenseSection(license) {}
+// Creates a function that returns the license section of README
+// If there is no license, returns an empty string
+function renderLicenseSection(license) {
+  switch(license) {
+    case 'None':
+      return '';
+    case 'MIT License':
+      return 'MIT License';
+    case 'Apache License 2.0':
+      return 'Apache License 2.0';
+    case 'BSD 2-Clause License':
+      return 'BSD 2-Clause License';
+  }
+}
 
-// if (data.license == 'none'){
-//   data.license="";
-// } else {
-//   renderLicenseBadge(data.license)
-//   renderLicenseLink(data.license)
-//   renderLicenseSection(data.license)
-// }
-
-// console.log(data)
-// TODO: Create a function to generate markdown for README
+// Creates a function to generate markdown for README
 function generateMarkdown(data) {
-  console.log(data)
-  return `# ${data.title}
+ let badge = renderLicenseBadge(data.license);
+ let link = renderLicenseLink(data.license);
+ let section = renderLicenseSection(data.license);
+  return `
+  # ${data.title}
+
+  ${badge}
+
   ## Description
-  # ${data.description}
+
+  ${data.description}
+
   ## Table of Contents
-  # ${data.contents}
+
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [License](#license)
+  - [Contributing](#contributing)
+  - [Test](#test)
+  - [Questions](#questions)
+
   ## Installation
-  # ${data.installation}
+
+  ${data.installation}
+
   ## Usage
-  # ${data.usage}
+
+  ${data.usage}
+
   ## License
-  # ${data.license}
+
+  [${link}](${link})
+
+  ${section}
+
   ## Contributing
-  # ${data.contributing}
+
+  ${data.contributing}
+
   ## Tests
-  # ${data.test}
+
+  ${data.test}
+
   ## Questions
-  # ${data.questions}
+
+  GitHub: https://github.com/${data.username}
+
+  For questions, please feel free to reach out via email
+  at: [${data.email}](${data.email})
 `;
 }
 

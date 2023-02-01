@@ -1,56 +1,73 @@
-// TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
 const generateMarkdown = require("./utils/generateMarkdown");
 
-// TODO: Create an array of questions for user input
-const questions = [
-    {
-        type: 'input',
-        message: 'README description',
-        name: 'description',
-    },
-    {
-        type: 'input',
-        message: 'Table of Contents',
-        name: 'contents',
-    },
-    {
-        type: 'input',
-        message: 'Installation',
-        name: 'installation',
-    },
-    {
-        type: 'input',
-        message: 'Usage',
-        name: 'usage',
-    },
-    {
-        type: 'input',
-        message: 'License',
-        name: 'license',
-    },
-    {
-        type: 'input',
-        message: 'Contributing',
-        name: 'contributing',
-    },
-    {
-        type: 'input',
-        message: 'Test',
-        name: 'test',
-    },
-    {
-        type: 'input',
-        message: 'Questions',
-        name: 'questions',
-    },
-];
+const licenseOptions = ['None','Apache License 2.0','MIT License',
+    'BSD 2-Clause License'];
 
-// TODO: Create a function to write README file
+// Creates an array of questions for user input
+const questions = [
+            {
+                type: 'input',
+                message: 'Project Title:',
+                name: 'title',
+                default: 'Project',
+            },
+            {
+                type: 'input',
+                message: 'README description:',
+                name: 'description',
+                default: 'What was your motivation? Why did you build this project? What problem does it solve? What did you learn?',
+            },
+            {
+                type: 'input',
+                message: 'Installation:',
+                name: 'installation',
+                default: 'N/A',
+            },
+            {
+                type: 'input',
+                message: 'Usage:',
+                name: 'usage',
+                default: 'N/A',
+            },
+            {
+                type: 'list',
+                message: 'License:',
+                name: 'license',
+                choices: licenseOptions,
+            },
+            {
+                type: 'input',
+                message: 'Contributing:',
+                name: 'contributing',
+                default: 'N/A',
+            },
+            {
+                type: 'input',
+                message: 'Test:',
+                name: 'test',
+                default: 'N/A',
+            },
+            {
+                type: 'input',
+                message: 'GitHub username:',
+                name: 'username',
+                default: '',
+            },
+            {
+                type: 'input',
+                message: 'Email Address:',
+                name: 'email',
+                default: 'email@email.com',
+            }
+        ];
+
+// Creates a function to write README file
 function writeToFile(fileName, data) {
+
     const md = generateMarkdown(data)
-    fs.writeFile('README',md, (err) => {
+    fs.writeFile("README.md",md, (err) => {
         if (err) {
             console.error(err)
         } else {
@@ -59,70 +76,22 @@ function writeToFile(fileName, data) {
     })
 }
 
-// TODO: Create a function to initialize app
+// Creates a function to initialize app
 function init() {
     inquirer
-        .prompt([
-            // fix if possible
-            {
-                type: 'input',
-                message: 'Project Title:',
-                name: 'title',
-            },
-            {
-                type: 'input',
-                message: 'README description:',
-                name: 'description',
-            },
-            {
-                type: 'input',
-                message: 'Table of Contents:',
-                name: 'contents',
-            },
-            {
-                type: 'input',
-                message: 'Installation:',
-                name: 'installation',
-            },
-            {
-                type: 'input',
-                message: 'Usage:',
-                name: 'usage',
-            },
-            {
-                type: 'input',
-                message: 'License:',
-                name: 'license',
-            },
-            {
-                type: 'input',
-                message: 'Contributing:',
-                name: 'contributing',
-            },
-            {
-                type: 'input',
-                message: 'Test:',
-                name: 'test',
-            },
-            {
-                type: 'input',
-                message: 'Questions:',
-                name: 'questions',
-            },
-        ])
+        .prompt(questions)
         .then((data) => {
             const prompt = {
                 title: data.title,
                 description: data.description,
-                contents: data.contents,
                 installation: data.installation,
                 usage: data.usage,
                 license: data.license,
                 contributing: data.contributing,
                 test: data.test,
-                questions: data.questions
+                username: data.username,
+                email: data.email
             }
-
         writeToFile(prompt.title,prompt)
 });
 }
