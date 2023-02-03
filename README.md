@@ -22,7 +22,7 @@
 
   ## Usage
 
-  N/A
+  Video Walkthrough: https://drive.google.com/file/d/1oj3CY4UnPCj7MyMjqI9Afyr2em7FHgpp/view?usp=sharing
 
   ## License
 
@@ -34,7 +34,7 @@
 
   N/A
 
-  ## Tests
+  ## Test
 
   N/A
 
